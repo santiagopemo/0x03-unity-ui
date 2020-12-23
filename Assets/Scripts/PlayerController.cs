@@ -5,18 +5,29 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    Rigidbody rb;
+    private Rigidbody rb;
+    private int score;
 
     // Start is called before the first frame update
     void Start()
     {
         speed = 30;
+        score = 0;
         rb = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
         MovePlayer();
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            score++;
+            other.gameObject.SetActive(false);
+            Debug.Log("Score: " + score);
+        }
     }
 
     void MovePlayer()
