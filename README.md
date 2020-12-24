@@ -1,4 +1,6 @@
 # 0x02. Unity - Scripting
+## Build
+[Click her](https://santiagopemo.github.io/0x02-unity-scripting/) to watch the game
 ## Resources :books:
 ### Read or watch:
 
