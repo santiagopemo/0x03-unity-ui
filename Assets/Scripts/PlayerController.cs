@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -47,6 +46,7 @@ public class PlayerController : MonoBehaviour
         {
             // Debug.Log("You win!");
             SetWinText();
+            StartCoroutine(LoadScene(3));
         }
     }
 
@@ -81,6 +81,12 @@ public class PlayerController : MonoBehaviour
         winLoseBG.color = Color.red;
     }
 
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene("maze");
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -88,7 +94,12 @@ public class PlayerController : MonoBehaviour
         {
             // Debug.Log("Game Over!");
             SetLoseText();
-            SceneManager.LoadScene("maze");
+            // SceneManager.LoadScene("maze");
+            StartCoroutine(LoadScene(3));
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("menu");
         }
     }
 }
