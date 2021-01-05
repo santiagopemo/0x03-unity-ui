@@ -1,4 +1,6 @@
 # 0x03. Unity - UI
+## Build
+[Click here](https://santiagopemo.github.io/0x03-unity-ui/) to watch the game
 ## Resources :books:
 ### Read or watch:
 
