@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private int score;
     public int health;
+    public Text scoreText;
+    public Text healthText;
+    public Text winLoseText;
+    public Image winLoseBG;
 
     // Start is called before the first frame update
     void Start()
@@ -29,16 +34,19 @@ public class PlayerController : MonoBehaviour
         {
             score++;
             other.gameObject.SetActive(false);
-            Debug.Log("Score: " + score);
+            // Debug.Log("Score: " + score);
+            SetScoreText();
         }
         if (other.gameObject.CompareTag("Trap"))
         {
             health--;
-            Debug.Log("Health: " + health);
+            // Debug.Log("Health: " + health);
+            SetHealthText();
         }
         if (other.gameObject.CompareTag("Goal"))
         {
-            Debug.Log("You win!");
+            // Debug.Log("You win!");
+            SetWinText();
         }
     }
 
@@ -48,12 +56,38 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + score;
+    }
+    void SetHealthText()
+    {
+        healthText.text = "Health: " + health;
+    }
+
+    void SetWinText()
+    {
+        winLoseText.text = "You Win!";
+        winLoseBG.gameObject.SetActive(true);
+        winLoseText.color = Color.black;
+        winLoseBG.color = Color.green;        
+    }
+
+    void SetLoseText()
+    {
+        winLoseText.text = "Game Over!";
+        winLoseBG.gameObject.SetActive(true);
+        winLoseText.color = Color.white;
+        winLoseBG.color = Color.red;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (health == 0)
         {
-            Debug.Log("Game Over!");
+            // Debug.Log("Game Over!");
+            SetLoseText();
             SceneManager.LoadScene("maze");
         }
     }
